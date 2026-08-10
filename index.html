@@ -443,31 +443,29 @@
 (function(){
   "use strict";
 
-   /* ---------- storage helpers ---------- */
-  function storeGet(key) {
-    try {
+  /* ---------- storage helpers ---------- */
+  async function storeGet(key){
+    try{
       const raw = localStorage.getItem(key);
       return raw ? JSON.parse(raw) : null;
-    } catch (e) {
+    } catch(e){
       console.error('storage get failed', e);
       return null;
     }
   }
 
-  function storeSet(key, val) {
-    try {
+  async function storeSet(key, val){
+    try{
       localStorage.setItem(key, JSON.stringify(val));
       return true;
-    } catch (e) {
+    } catch(e){
       console.error('storage set failed', e);
-      // 로컬스토리지 용량 초과(약 5MB) 시 안내
       if (e.name === 'QuotaExceededError' || e.code === 22) {
-        showToast('저장 용량이 초과되었습니다!');
+        showToast('사진 용량이 커서 저장되지 않았습니다!');
       }
       return false;
     }
   }
-
   /* ---------- date utils ---------- */
   const ANCHOR = new Date(2024,0,1); // Monday
   function addDays(d,n){ const nd=new Date(d); nd.setDate(nd.getDate()+n); return nd; }
