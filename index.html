@@ -449,7 +449,7 @@
       const raw = localStorage.getItem(key);
       return raw ? JSON.parse(raw) : null;
     } catch(e){
-      console.error('storage get failed', e);
+      console.error('storeGet 오류:', e);
       return null;
     }
   }
@@ -459,7 +459,7 @@
       localStorage.setItem(key, JSON.stringify(val));
       return true;
     } catch(e){
-      console.error('storage set failed', e);
+      console.error('storeSet 오류:', e);
       if (e.name === 'QuotaExceededError' || e.code === 22) {
         showToast('사진 용량이 커서 저장되지 않았습니다!');
       }
