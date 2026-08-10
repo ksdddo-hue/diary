@@ -839,16 +839,19 @@
   });
 
   document.getElementById('prevBtn').addEventListener('click', async ()=>{
+    await flushSave();//
     await loadPeriod(addDays(currentPeriodStart, -14));
     if(activeMainTab==='routine'){ renderRoutineNames(); renderRoutineTable(); renderStats(); }
     else renderWeekly();
   });
   document.getElementById('nextBtn').addEventListener('click', async ()=>{
+        await flushSave();//
     await loadPeriod(addDays(currentPeriodStart, 14));
     if(activeMainTab==='routine'){ renderRoutineNames(); renderRoutineTable(); renderStats(); }
     else renderWeekly();
   });
   document.getElementById('todayBtn').addEventListener('click', async ()=>{
+        await flushSave();//
     await loadPeriod(periodStartFor(new Date()));
     if(activeMainTab==='routine'){ renderRoutineNames(); renderRoutineTable(); renderStats(); }
     else renderWeekly();
